@@ -1,9 +1,6 @@
 import React from "react";
 import { Tabs, Redirect } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
-// import { Home } from "~/lib/icons/Home";
-// import { User } from "~/lib/icons/Profile";
-// import { ClipboardPlus } from "~/lib/icons/reports";
 import { Home, User, ClipboardPlus } from "~/lib/icons";
 
 export default function TabsLayout() {
