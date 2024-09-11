@@ -1,13 +1,16 @@
 import { View, Text } from "react-native";
-import React, { useContext } from "react";
-import { SessionContext } from "./_layout";
+import { Redirect } from "expo-router";
+import { useAuth } from "~/providers/auth-provider";
 
 const Home = () => {
-  const session = useContext(SessionContext)
+  const { user } = useAuth();
 
+  if (!user) {
+    return <Redirect href="/sign-in" />;
+  }
   return (
     <View>
-      <Text>{session ? session.user.email : "No Session"}</Text>
+      <Text>Email: {user?.email}</Text>
     </View>
   );
 };
