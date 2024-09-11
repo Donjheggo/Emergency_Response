@@ -11,7 +11,6 @@ import { Link, router } from "expo-router";
 const SignUp = () => {
   const [isLoading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -38,18 +37,6 @@ const SignUp = () => {
       <Text className="text-center font-semibold text-2xl text-primary">
         Sign up
       </Text>
-      <View>
-        <Label nativeID="name" className="pb-1">
-          Full name
-        </Label>
-        <Input
-          placeholder="John Doe"
-          value={form.name}
-          onChangeText={(e) => setForm({ ...form, name: e })}
-          aria-labelledby="inputLabel"
-          aria-errormessage="inputError"
-        />
-      </View>
       <View>
         <Label nativeID="email" className="pb-1">
           Email
