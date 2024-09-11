@@ -70,7 +70,7 @@ const SignIn = () => {
         variant="default"
         className="text-white mt-2"
       >
-        <Text>Create Account</Text>
+        <Text>Sign in</Text>
       </Button>
       <Text>
         Don't have an account?
