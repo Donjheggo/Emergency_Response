@@ -11,7 +11,6 @@ import { supabase } from "~/lib/supabase";
 const SignIn = () => {
   const [isLoading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -19,16 +18,17 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   async function signInWithEmail() {
-    setLoading(true);
+    setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password,
-    });
+    })
 
-    if (error) Alert.alert(error.message);
-    router.replace("/home");
-    setLoading(false);
+    if (error) Alert.alert(error.message)
+    router.push('/home')
+    setLoading(false)
   }
+
 
   return (
     <View className="w-full flex flex-col gap-3">
@@ -76,6 +76,7 @@ const SignIn = () => {
         </View>
       </View>
       <Button
+        disabled={isLoading}
         onPress={signInWithEmail}
         variant="default"
         className="text-white mt-2"

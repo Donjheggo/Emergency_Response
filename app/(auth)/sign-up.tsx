@@ -27,9 +27,9 @@ const SignUp = () => {
       password: form.password,
     });
 
-    if (error) Alert.alert(error.message);
-    router.replace("/home");
     setLoading(false);
+    if (error) Alert.alert(error.message);
+    if (session) router.replace("/home");
   }
 
   return (

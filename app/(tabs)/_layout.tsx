@@ -1,12 +1,32 @@
-import React from "react";
-import { View } from "lucide-react-native";
-import { Tabs } from "expo-router";
+import React, { useState, useEffect, createContext } from "react";
+import { supabase } from "~/lib/supabase";
+import { Tabs, router } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
+import { Session } from "@supabase/supabase-js";
 import { Home, User, ClipboardPlus } from "~/lib/icons";
 
+export const SessionContext = createContext<Session | null>(null)
+
 export default function TabsLayout() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  if (!session?.user) {
+    router.push("/sign-in");
+    return null;
+  }
+
   return (
-    <>
+    <SessionContext.Provider value={session}>
       <Tabs>
         <Tabs.Screen
           name="home"
@@ -36,6 +56,6 @@ export default function TabsLayout() {
           }}
         />
       </Tabs>
-    </>
+    </SessionContext.Provider>
   );
 }
