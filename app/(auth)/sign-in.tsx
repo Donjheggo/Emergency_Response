@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { Eye, EyeOff } from "lucide-react-native";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
+import { supabase } from "~/lib/supabase";
 
 const SignIn = () => {
+  const [isLoading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -16,9 +18,17 @@ const SignIn = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = () => {
-    alert(JSON.stringify(form));
-  };
+  async function signInWithEmail() {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: form.email,
+      password: form.password,
+    });
+
+    if (error) Alert.alert(error.message);
+    router.replace("/home");
+    setLoading(false);
+  }
 
   return (
     <View className="w-full flex flex-col gap-3">
@@ -66,7 +76,7 @@ const SignIn = () => {
         </View>
       </View>
       <Button
-        onPress={handleSubmit}
+        onPress={signInWithEmail}
         variant="default"
         className="text-white mt-2"
       >

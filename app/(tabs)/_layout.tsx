@@ -1,4 +1,5 @@
 import React from "react";
+import { View } from "lucide-react-native";
 import { Tabs } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
 import { Home, User, ClipboardPlus } from "~/lib/icons";

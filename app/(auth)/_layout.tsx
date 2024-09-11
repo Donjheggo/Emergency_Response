@@ -1,6 +1,15 @@
 import React from "react";
-import { View, Image, SafeAreaView, ScrollView } from "react-native";
+import { View, Image, SafeAreaView, ScrollView, AppState } from "react-native";
+import { supabase } from "~/lib/supabase";
 import { Slot } from "expo-router";
+
+AppState.addEventListener("change", (state) => {
+  if (state === "active") {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
+});
 
 const AuthLayout = () => {
   return (
