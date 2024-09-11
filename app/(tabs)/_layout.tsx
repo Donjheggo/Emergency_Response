@@ -20,11 +20,6 @@ export default function TabsLayout() {
     });
   }, []);
 
-  if (!session?.user) {
-    router.push("/sign-in");
-    return null;
-  }
-
   return (
     <SessionContext.Provider value={session}>
       <Tabs>

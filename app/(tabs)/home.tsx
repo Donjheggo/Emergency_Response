@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <View>
-      <Text>{session ? session.email : "No Session"}</Text>
+      <Text>{session ? session.user.email : "No Session"}</Text>
     </View>
   );
 };
