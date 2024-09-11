@@ -1,14 +1,23 @@
-import { View, Text } from 'react-native'
-import { Slot } from 'expo-router'
-import React from 'react'
+import React from "react";
+import { View, Image, SafeAreaView, ScrollView } from "react-native";
+import { Slot } from "expo-router";
 
 const AuthLayout = () => {
   return (
-    <View className='flex-1 justify-center items-center gap-5 p-6'>
-      <Text className='text-3xl'>Logo here</Text>
-      <Slot/>
-    </View>
-  )
-}
+    <SafeAreaView className="h-full bg-secondary">
+      <ScrollView>
+        <View className="min-h-[70vh] flex justify-center items-center gap-5 p-6">
+          <Image
+            source={require("../../assets/images/adaptive-icon.png")}
+            resizeMode="contain"
+            // className="w-[120] h-[120]"
+            style={{ width: 100, height: 100 }}
+          />
+          <Slot />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
 
-export default AuthLayout
+export default AuthLayout;
