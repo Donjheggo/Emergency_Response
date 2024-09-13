@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import { Text } from "~/components/ui/text";
 import { supabase } from "~/lib/supabase";
-import { Redirect } from "expo-router";
 import { Button } from "~/components/ui/button";
 import React, { useState, useEffect } from "react";
 import { useAuth } from "~/providers/auth-provider";
@@ -49,10 +48,6 @@ const Profile = () => {
         Alert.alert(error.message);
       }
     }
-  }
-
-  if (!user) {
-    return <Redirect href="/sign-in" />;
   }
 
   return (

@@ -7,6 +7,7 @@ import { Button } from "~/components/ui/button";
 import { Eye, EyeOff } from "lucide-react-native";
 import { Link, router } from "expo-router";
 import { supabase } from "~/lib/supabase";
+import { useAuth } from "~/providers/auth-provider";
 
 const SignIn = () => {
   const [isLoading, setLoading] = useState(false);
@@ -18,15 +19,14 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   async function signInWithEmail() {
-    setLoading(true)
+    setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password,
-    })
+    });
 
-    if (error) Alert.alert(error.message)
-    router.push('/home')
-    setLoading(false)
+    if (error) Alert.alert(error.message);
+    setLoading(false);
   }
 
 
