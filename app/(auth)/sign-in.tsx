@@ -5,9 +5,8 @@ import { Label } from "~/components/ui/label";
 import { Text } from "~/components/ui/text";
 import { Button } from "~/components/ui/button";
 import { Eye, EyeOff } from "lucide-react-native";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import { supabase } from "~/lib/supabase";
-import { useAuth } from "~/providers/auth-provider";
 
 const SignIn = () => {
   const [isLoading, setLoading] = useState(false);
@@ -28,7 +27,6 @@ const SignIn = () => {
     if (error) Alert.alert(error.message);
     setLoading(false);
   }
-
 
   return (
     <View className="w-full flex flex-col gap-3">
@@ -76,6 +74,7 @@ const SignIn = () => {
         </View>
       </View>
       <Button
+        size="lg"
         disabled={isLoading}
         onPress={signInWithEmail}
         variant="default"

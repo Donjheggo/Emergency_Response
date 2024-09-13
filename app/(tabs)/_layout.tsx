@@ -23,7 +23,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="reports"
         options={{
-          title: "Reports",
+          title: "My Reports",
           tabBarIcon: ({ focused }) => (
             <TabIcon icon={ClipboardPlus} focused={focused} />
           ),

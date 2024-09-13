@@ -53,6 +53,7 @@ const Profile = () => {
   return (
     <View>
       <Text className="text-2xl">Profile</Text>
+      <Text>Id: {user?.id}</Text>
       <Text>Name: {userData?.name ?? "No name added yet"}</Text>
       <Text>Email: {userData?.email}</Text>
       <Button disabled={loading} onPress={signOut} variant="secondary">

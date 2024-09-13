@@ -2,6 +2,7 @@ import { View, Image, SafeAreaView, ScrollView, AppState } from "react-native";
 import { supabase } from "~/lib/supabase";
 import { router, Slot } from "expo-router";
 import { useAuth } from "~/providers/auth-provider";
+import { useEffect } from "react";
 
 AppState.addEventListener("change", (state) => {
   if (state === "active") {
@@ -13,9 +14,12 @@ AppState.addEventListener("change", (state) => {
 
 const AuthLayout = () => {
   const { user } = useAuth();
-  if (user) {
-    router.push("/home");
-  }
+
+  useEffect(() => {
+    if (user) {
+      router.push("/home");
+    }
+  }, [user]);
 
   return (
     <SafeAreaView className="h-full bg-secondary">

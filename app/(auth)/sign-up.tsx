@@ -78,6 +78,7 @@ const SignUp = () => {
         </View>
       </View>
       <Button
+        size="lg"
         onPress={signUpWithEmail}
         variant="default"
         className="text-white mt-2"
