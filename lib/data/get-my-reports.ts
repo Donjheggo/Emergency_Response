@@ -6,7 +6,8 @@ export async function getEmergencyWithResponder(userId: string) {
     const { data, error } = await supabase
       .from("emergency")
       .select(`*, responder ( type ) `)
-      .eq("userId", userId);
+      .eq("userId", userId)
+      .order("created_at", { ascending: false });
 
     if (error) {
       throw error;
