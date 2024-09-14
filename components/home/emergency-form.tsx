@@ -6,8 +6,9 @@ import { Label } from "~/components/ui/label";
 import { Button } from "~/components/ui/button";
 import { Textarea } from "~/components/ui/textarea";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useAuth } from "~/providers/auth-provider";
+import { useAuth } from "~/context/auth-context";
 import { Alert } from "react-native";
+import { router } from "expo-router";
 import { getResponders, type ResponderT } from "~/lib/data/reponders";
 import {
   Select,
@@ -62,12 +63,13 @@ const EmergencyForm = () => {
     }
 
     setLoading(true);
-    
+
     try {
       const { error } = await supabase.from("emergency").insert(form);
       if (error) Alert.alert(error.message);
       Alert.alert("Emergency Submitted Successfully.");
       setLoading(false);
+      router.replace("/reports");
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert(error.message);

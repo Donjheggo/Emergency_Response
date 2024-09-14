@@ -1,7 +1,7 @@
 import { Redirect, Tabs } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
 import { Home, User, ClipboardPlus } from "~/lib/icons";
-import { useAuth } from "~/providers/auth-provider";
+import { useAuth } from "~/context/auth-context";
 
 export default function TabsLayout() {
   const { user } = useAuth();
@@ -14,7 +14,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: "Home",
+          title: "Report Emergency",
           tabBarIcon: ({ focused }) => (
             <TabIcon icon={Home} focused={focused} />
           ),

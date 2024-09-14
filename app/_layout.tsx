@@ -11,7 +11,7 @@ import { useColorScheme } from "~/lib/use-color-scheme";
 import { PortalHost } from "@rn-primitives/portal";
 import { ThemeToggle } from "~/components/theme-toggle";
 import { setAndroidNavigationBar } from "~/lib/android-navigation-bar";
-import AuthProvider from "~/providers/auth-provider";
+import AuthProvider from "~/context/auth-context";
 
 const LIGHT_THEME: Theme = {
   dark: false,

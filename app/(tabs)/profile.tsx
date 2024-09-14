@@ -3,7 +3,7 @@ import { Text } from "~/components/ui/text";
 import { supabase } from "~/lib/supabase";
 import { Button } from "~/components/ui/button";
 import React, { useState, useEffect } from "react";
-import { useAuth } from "~/providers/auth-provider";
+import { useAuth } from "~/context/auth-context";
 import { Alert } from "react-native";
 
 type UserData = {

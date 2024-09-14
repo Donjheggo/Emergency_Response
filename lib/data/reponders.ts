@@ -20,3 +20,21 @@ export async function getResponders() {
     }
   }
 }
+
+export async function getResponder(id: string) {
+  try {
+    const { data, error } = await supabase
+      .from("responder")
+      .select("*")
+      .eq("id", id);
+
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      Alert.alert(error.message);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { View, Image, SafeAreaView, ScrollView, AppState } from "react-native";
 import { supabase } from "~/lib/supabase";
 import { router, Slot } from "expo-router";
-import { useAuth } from "~/providers/auth-provider";
+import { useAuth } from "~/context/auth-context";
 import { useEffect } from "react";
 
 AppState.addEventListener("change", (state) => {
