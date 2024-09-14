@@ -1,4 +1,11 @@
-import { Home, User, ClipboardPlus, Sun, MoonStar } from "lucide-react-native";
+import {
+  Home,
+  User,
+  ClipboardPlus,
+  Sun,
+  MoonStar,
+  Settings,
+} from "lucide-react-native";
 import type { LucideIcon } from "lucide-react-native";
 import { cssInterop } from "nativewind";
 
@@ -18,6 +25,7 @@ IconWithClassName(Home);
 IconWithClassName(User);
 IconWithClassName(ClipboardPlus);
 IconWithClassName(Sun);
+IconWithClassName(Settings);
 IconWithClassName(MoonStar);
 
-export { Home, User, ClipboardPlus, Sun, MoonStar };
+export { Home, User, ClipboardPlus, Sun, MoonStar, Settings };

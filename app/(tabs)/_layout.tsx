@@ -1,6 +1,6 @@
 import { Redirect, Tabs } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
-import { Home, User, ClipboardPlus } from "~/lib/icons";
+import { Home, User, ClipboardPlus, Settings} from "~/lib/icons";
 import { useAuth } from "~/context/auth-context";
 
 export default function TabsLayout() {
@@ -30,11 +30,11 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="settings"
         options={{
-          title: "Profile",
+          title: "Settings",
           tabBarIcon: ({ focused }) => (
-            <TabIcon icon={User} focused={focused} />
+            <TabIcon icon={Settings} focused={focused} />
           ),
         }}
       />
