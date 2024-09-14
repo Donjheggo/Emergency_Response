@@ -24,13 +24,7 @@ const AuthLayout = () => {
   return (
     <SafeAreaView className="h-full bg-secondary">
       <ScrollView>
-        <View className="min-h-[50vh] flex justify-center items-center gap-5 p-6">
-          <Image
-            source={require("../../assets/images/auth.png")}
-            resizeMode="contain"
-            // className="w-[120] h-[120]"
-            style={{ width: 200, height: 200 }}
-          />
+        <View className="mt-10 flex justify-center items-center gap-5 p-6">
           <Slot />
         </View>
       </ScrollView>

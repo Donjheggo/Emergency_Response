@@ -43,17 +43,17 @@ export const ReportCard = ({ item }: { item: EmergencyWithResponderT }) => {
         {item.status === "pending" ? (
           <View className="flex flex-row items-center gap-1">
             <Loader color={"#e11d48"} />
-            <Text>Pending...</Text>
+            <Text className="text-primary">Pending...</Text>
           </View>
         ) : item.status === "responded" ? (
           <View className="flex flex-row items-center gap-1">
             <Ambulance color={"#e11d48"} />
-            <Text>Responded</Text>
+            <Text className="text-primary">Responded</Text>
           </View>
         ) : item.status === "declined" ? (
           <View className="flex flex-row items-center gap-1">
             <CircleX color={"#e11d48"} />
-            <Text>Declined</Text>
+            <Text className="text-primary">Declined</Text>
           </View>
         ) : (
           ""

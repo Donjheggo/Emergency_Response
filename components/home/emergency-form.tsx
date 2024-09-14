@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuth } from "~/context/auth-context";
 import { Alert } from "react-native";
 import { router } from "expo-router";
-import { getResponders, type ResponderT } from "~/lib/data/reponders";
+import { getResponders, type ResponderT } from "~/lib/data/responders";
 import {
   Select,
   SelectContent,
@@ -41,8 +41,8 @@ const EmergencyForm = () => {
 
   useEffect(() => {
     const fetchResponders = async () => {
-      const reponders = await getResponders();
-      if (reponders) setResponders(reponders);
+      const responder = await getResponders();
+      if (responder) setResponders(responder);
     };
 
     fetchResponders();
@@ -83,7 +83,7 @@ const EmergencyForm = () => {
     <>
       <View>
         <Label nativeID="email" className="pb-1">
-          Reponder
+          Responder
         </Label>
         <Select
           defaultValue={{ value: "", label: "" }}

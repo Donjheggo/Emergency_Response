@@ -35,7 +35,7 @@ const SignUp = () => {
   return (
     <View className="w-full flex flex-col gap-3">
       <Text className="text-center font-semibold text-2xl text-primary">
-        Sign up
+        Create an Account
       </Text>
       <View>
         <Label nativeID="email" className="pb-1">
