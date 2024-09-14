@@ -24,7 +24,7 @@ const Settings = () => {
   }
 
   return (
-    <View className="p-5 flex flex-col space-x-5">
+    <View className="px-5 flex flex-col space-x-5">
       <ThemeToggle />
       <Button
         size="lg"
