@@ -5,9 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { Text } from "~/components/ui/text";
 import EmergencyForm from "~/components/home/emergency-form";
-import { Siren } from "lucide-react-native";
 
 const Home = () => {
   return (
