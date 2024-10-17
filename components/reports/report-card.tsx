@@ -32,12 +32,11 @@ export const ReportCard = ({ item }: { item: EmergencyWithResponderT }) => {
         <CardTitle>{item.responder?.type}</CardTitle>
         <CardDescription>
           <Text>{formattedDate} - </Text>
-          <Text>{item.isRead ? "Seen" : "Unseen"}</Text>
+          <Text>{item.isRead ? "Read" : "Unread"}</Text>
         </CardDescription>
       </CardHeader>
       <CardContent>
         <Text className="text-lg">Description: {item.description}</Text>
-        <Text className="text-lg">Address: {item.address}</Text>
       </CardContent>
       <CardFooter>
         {item.status === "pending" ? (

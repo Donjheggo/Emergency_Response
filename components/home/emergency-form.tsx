@@ -1,3 +1,4 @@
+import { Locate } from "lucide-react-native";
 import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { Text } from "~/components/ui/text";
@@ -19,6 +20,11 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { supabase } from "~/lib/supabase";
+import * as Location from "expo-location";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import { decode } from "base64-arraybuffer";
+import { Image } from "react-native";
 
 export type EmergencyT = {
   userId: string;
@@ -37,6 +43,8 @@ const EmergencyForm = () => {
     status: "pending",
     description: "",
     address: "",
+    name: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -56,6 +64,32 @@ const EmergencyForm = () => {
     right: 12,
   };
 
+  // Function to get user's location
+  const handleGetLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== "granted") {
+      Alert.alert("Permission to access location was denied");
+      return;
+    }
+
+    const location = await Location.getCurrentPositionAsync({});
+    const address = `${location.coords.latitude}, ${location.coords.longitude}`;
+    setForm({ ...form, address });
+  };
+
+  const pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setForm({ ...form, image: result.assets[0].uri });
+    }
+  };
+
   const handleSubmit = async () => {
     if (!form.responderId || !form.address || !form.description) {
       Alert.alert("Please fill out all fields.");
@@ -65,15 +99,54 @@ const EmergencyForm = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.from("emergency").insert(form);
-      if (error) Alert.alert(error.message);
+      const image = form.image;
+      const base64 = await FileSystem.readAsStringAsync(image, {
+        encoding: "base64",
+      });
+      const filePath = `${new Date().getTime()}_emergency.jpg`;
+      const contentType = "image/*";
+      const { error: uploadError } = await supabase.storage
+        .from("images")
+        .upload(filePath, decode(base64), { contentType });
+
+      if (uploadError) {
+        Alert.alert(uploadError.message);
+        return;
+      }
+
+      const { data: imageData } = supabase.storage
+        .from("images")
+        .getPublicUrl(filePath);
+
+      if (!imageData) {
+        Alert.alert("Failed to upload image.");
+      }
+
+      // Insert emergency record with image URL
+      const { error } = await supabase
+        .from("emergency")
+        .insert({ ...form, image: imageData.publicUrl });
+
+      if (error) {
+        Alert.alert(error.message);
+        setLoading(false);
+        return;
+      }
+      setForm({
+        userId: user?.id,
+        responderId: "",
+        status: "pending",
+        description: "",
+        address: "",
+        name: "",
+        image: "",
+      });
       Alert.alert("Emergency Submitted Successfully.");
       setLoading(false);
       router.replace("/reports");
     } catch (error) {
       if (error instanceof Error) {
         Alert.alert(error.message);
-        setLoading(false);
       }
       setLoading(false);
     }
@@ -83,7 +156,7 @@ const EmergencyForm = () => {
     <>
       <View>
         <Label nativeID="email" className="pb-1">
-          Responder
+          Emergency Responder
         </Label>
         <Select
           defaultValue={{ value: "", label: "" }}
@@ -109,6 +182,32 @@ const EmergencyForm = () => {
         </Select>
       </View>
       <View>
+        <Label nativeID="image" className="pb-1">
+          Image
+        </Label>
+        <View className="flex-row items-center gap-2">
+          <Input
+            placeholder="Select an image..."
+            value={form.image}
+            editable={false}
+            aria-labelledby="image"
+            className="hidden"
+          />
+          <Button variant="outline" onPress={pickImage}>
+            <Text>Browse</Text>
+          </Button>
+        </View>
+        {form.image ? (
+          <View className="mt-2">
+            <Image
+              source={{ uri: form.image }}
+              style={{ width: 200, height: 200 }}
+              className="rounded-md"
+            />
+          </View>
+        ) : null}
+      </View>
+      <View>
         <Label nativeID="email" className="pb-1">
           Description
         </Label>
@@ -120,17 +219,41 @@ const EmergencyForm = () => {
         />
       </View>
       <View>
-        <Label nativeID="email" className="pb-1">
-          Address
+        <Label nativeID="name" className="pb-1">
+          Full name
         </Label>
         <Input
-          placeholder="Purok, Street, Barangay"
-          value={form.address}
-          onChangeText={(e) => setForm({ ...form, address: e })}
-          aria-labelledby="Address"
+          placeholder="Full name"
+          value={form.name}
+          onChangeText={(e) => setForm({ ...form, name: e })}
+          aria-labelledby="name"
           aria-errormessage="inputError"
           keyboardType="default"
         />
+      </View>
+      <View>
+        <Label nativeID="email" className="pb-1">
+          Location
+        </Label>
+        <View className="relative">
+          <Input
+            editable={false}
+            placeholder=""
+            value={form.address}
+            onChangeText={(e) => setForm({ ...form, address: e })}
+            aria-labelledby="Address"
+            aria-errormessage="inputError"
+            keyboardType="default"
+          />
+        </View>
+        <Button
+          onPress={handleGetLocation}
+          variant="ghost"
+          size="icon"
+          className="absolute right-1 top-8"
+        >
+          <Locate color="#e11d48" />
+        </Button>
       </View>
 
       <Button
