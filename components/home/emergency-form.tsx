@@ -37,13 +37,14 @@ const EmergencyForm = () => {
   const { user } = useAuth();
   const [responders, setResponders] = useState<ResponderT[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<any>({
     userId: user?.id,
     responderId: "",
     status: "pending",
     description: "",
     address: "",
     name: "",
+    contact_number: "",
     image: "",
   });
 
@@ -139,6 +140,7 @@ const EmergencyForm = () => {
         description: "",
         address: "",
         name: "",
+        contact_number: "",
         image: "",
       });
       Alert.alert("Emergency Submitted Successfully.");
@@ -226,6 +228,19 @@ const EmergencyForm = () => {
           placeholder="Full name"
           value={form.name}
           onChangeText={(e) => setForm({ ...form, name: e })}
+          aria-labelledby="name"
+          aria-errormessage="inputError"
+          keyboardType="default"
+        />
+      </View>
+      <View>
+        <Label nativeID="contact_number" className="pb-1">
+          Contact number
+        </Label>
+        <Input
+          placeholder="09*********"
+          value={form.contact_number}
+          onChangeText={(e) => setForm({ ...form, contact_number: e })}
           aria-labelledby="name"
           aria-errormessage="inputError"
           keyboardType="default"
