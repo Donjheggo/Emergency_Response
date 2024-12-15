@@ -12,8 +12,6 @@ export default function TabsLayout() {
     return <Redirect href="/sign-in" />;
   }
 
-  console.log("Submitted Verification: ", submitted_verification);
-
   return (
     <Tabs
       screenOptions={() => ({
@@ -41,24 +39,20 @@ export default function TabsLayout() {
           ),
         }}
       />
-      {submitted_verification ? (
-        <Tabs.Screen
-          name="verify"
-          options={{
-            href: null,
-          }}
-        />
-      ) : (
-        <Tabs.Screen
-          name="verify"
-          options={{
-            title: "Verify",
-            tabBarIcon: ({ focused }) => (
-              <TabIcon icon={SquareUserRound} focused={focused} />
-            ),
-          }}
-        />
-      )}
+
+      <Tabs.Screen
+        name="verify"
+        options={{
+          title: submitted_verification ? undefined : "Verify",
+          href: submitted_verification ? null : undefined,
+          tabBarIcon: submitted_verification
+            ? undefined
+            : ({ focused }) => (
+                <TabIcon icon={SquareUserRound} focused={focused} />
+              ),
+        }}
+      />
+
       <Tabs.Screen
         name="settings"
         options={{
