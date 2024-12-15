@@ -1,11 +1,11 @@
 import { Redirect, Tabs } from "expo-router";
 import { TabIcon } from "~/components/tab-icon";
-import { Home, User, ClipboardPlus, Settings } from "~/lib/icons";
+import { Home, SquareUserRound, ClipboardPlus, Settings } from "~/lib/icons";
 import { useAuth } from "~/context/auth-context";
 import { useColorScheme } from "~/lib/use-color-scheme";
 
 export default function TabsLayout() {
-  const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme();
+  const { isDarkColorScheme } = useColorScheme();
 
   const { user } = useAuth();
 
@@ -36,6 +36,15 @@ export default function TabsLayout() {
           title: "My Reports",
           tabBarIcon: ({ focused }) => (
             <TabIcon icon={ClipboardPlus} focused={focused} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="verify"
+        options={{
+          title: "Verify",
+          tabBarIcon: ({ focused }) => (
+            <TabIcon icon={SquareUserRound} focused={focused} />
           ),
         }}
       />

@@ -5,6 +5,7 @@ import {
   Sun,
   MoonStar,
   Settings,
+  SquareUserRound,
 } from "lucide-react-native";
 import type { LucideIcon } from "lucide-react-native";
 import { cssInterop } from "nativewind";
@@ -27,5 +28,6 @@ IconWithClassName(ClipboardPlus);
 IconWithClassName(Sun);
 IconWithClassName(Settings);
 IconWithClassName(MoonStar);
+IconWithClassName(SquareUserRound);
 
-export { Home, User, ClipboardPlus, Sun, MoonStar, Settings };
+export { Home, User, ClipboardPlus, Sun, MoonStar, Settings, SquareUserRound };
