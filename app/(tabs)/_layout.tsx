@@ -6,12 +6,14 @@ import { useColorScheme } from "~/lib/use-color-scheme";
 
 export default function TabsLayout() {
   const { isDarkColorScheme } = useColorScheme();
-
-  const { user } = useAuth();
+  const { user, submitted_verification } = useAuth();
 
   if (!user) {
     return <Redirect href="/sign-in" />;
   }
+
+  console.log("Submitted Verification: ", submitted_verification);
+
   return (
     <Tabs
       screenOptions={() => ({
@@ -39,15 +41,24 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="verify"
-        options={{
-          title: "Verify",
-          tabBarIcon: ({ focused }) => (
-            <TabIcon icon={SquareUserRound} focused={focused} />
-          ),
-        }}
-      />
+      {submitted_verification ? (
+        <Tabs.Screen
+          name="verify"
+          options={{
+            href: null,
+          }}
+        />
+      ) : (
+        <Tabs.Screen
+          name="verify"
+          options={{
+            title: "Verify",
+            tabBarIcon: ({ focused }) => (
+              <TabIcon icon={SquareUserRound} focused={focused} />
+            ),
+          }}
+        />
+      )}
       <Tabs.Screen
         name="settings"
         options={{
