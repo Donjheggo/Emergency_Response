@@ -5,7 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { Text } from "~/components/ui/text";
+import VerifyForm from "~/components/verify/verify-form";
 
 const Verify = () => {
   return (
@@ -16,8 +16,7 @@ const Verify = () => {
       >
         <ScrollView>
           <View className="w-full flex flex-col justify-center gap-3 px-5 mt-5">
-            {/* <EmergencyForm /> */}
-            <Text>Verify Form here</Text>
+            <VerifyForm />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
