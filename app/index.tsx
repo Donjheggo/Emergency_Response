@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 
 export default function Screen() {
   return (
-    <ScrollView className="h-full bg-secondary">
+    <ScrollView className="h-full bg-background">
       <View className="min-h-[80vh] flex justify-center items-center gap-5 p-6">
         <Text className="text-4xl text-primary font-semibold">
           Emergeny Response

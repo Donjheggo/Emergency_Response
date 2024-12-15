@@ -52,13 +52,13 @@ const Reports = () => {
   }, [user.id]);
 
   return (
-    <SafeAreaView className="h-full">
+    <SafeAreaView className="h-full bg-background">
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <View className="px-5 items-center">
+        <View className="px-5 items-center mt-5">
           {reports?.map((item: EmergencyWithResponderT, index: number) => (
             <ReportCard key={index} item={item} />
           ))}

@@ -24,18 +24,20 @@ const Settings = () => {
   }
 
   return (
-    <View className="px-5 flex flex-col space-x-5">
-      <ThemeToggle />
-      <Button
-        size="lg"
-        disabled={loading}
-        onPress={signOut}
-        variant="destructive"
-        className="mt-5 flex flex-row"
-      >
-        <LogOut color="#fff" />
-        <Text className="ml-2">Sign Out</Text>
-      </Button>
+    <View className="bg-background h-full px-5 flex flex-col space-x-5">
+      <View className="mt-5">
+        <ThemeToggle />
+        <Button
+          size="lg"
+          disabled={loading}
+          onPress={signOut}
+          variant="destructive"
+          className="mt-5 flex flex-row"
+        >
+          <LogOut color="#fff" />
+          <Text className="ml-2">Sign Out</Text>
+        </Button>
+      </View>
     </View>
   );
 };

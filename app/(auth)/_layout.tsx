@@ -22,7 +22,7 @@ const AuthLayout = () => {
   }, [user]);
 
   return (
-    <SafeAreaView className="h-full bg-secondary">
+    <SafeAreaView className="h-full bg-background">
       <ScrollView>
         <View className="mt-10 flex justify-center items-center gap-5 p-6">
           <Slot />
